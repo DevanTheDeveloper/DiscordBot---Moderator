@@ -2,8 +2,11 @@ import discord
 import datetime
 from keep_alive import keep_alive
 import os 
+import regex as re 
 import sqlite3
 from sql import *
+
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,14 +18,18 @@ client = discord.Client()
 #PYTHONASYNCIODEBUG=0
 
 #*****Character/Word Moderator app
-prohibited_words=[]
-def mod_scan(message):
-  for x in message.content():
-    if x in prohibited_words:
-      return True
-      #modlog infraction & msg to user
-    else:
-      return False
+prohibited_words = ['(c+o+v+i+d+)',"(t+e+s+t+)","🐔"]
+
+def filter(message,*args):
+    result = True
+    for word in prohibited_words:
+        if re.search(word,message) != None:
+            print(word)
+            print('prohibited word used')
+            result = False
+            break
+    return result
+
 
 INTRO_CHANNEL = ""
 
@@ -93,7 +100,10 @@ async def on_message(message):
     else:
       print("_----_-")
       if authscan(Database,Table,message.author):
-        pass
+        if filter(message.content) != True:
+          await message.delete()
+          await message.author.send("PLEASE DO NOT USE PROHIBITED WORDS!!!")
+          print("Message deleted",message.author,message.content)
       else:
         await message.author.send("In order to post within our Discord, please introduce yourself first in Introductions! Thank you!")
         await message.delete()
