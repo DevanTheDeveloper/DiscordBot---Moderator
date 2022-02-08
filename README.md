@@ -14,4 +14,9 @@ FUNCTION
 - Monitors all messages on guild to ensure all posters have introduced themselves. Posts from unintroduced members are deleted
 and a dm is sent to them with instructions on how to introduce.
 - Once introduced, sql entry is made for user and user sent dm welcoming them to guild.
+
+Prohibited word moderation
 - Displays message and user details for all messages sent within guild while active.
+- filters all messages in guild, if infraction, post is deleted and user dm sent.
+
+
