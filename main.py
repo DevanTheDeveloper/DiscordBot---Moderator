@@ -36,6 +36,7 @@ INTRO_CHANNEL = ""
 #*************D I S C O R D***************
 @client.event
 async def on_ready():
+  search(Database,Table)
   print("***********DISCORD MODERATOR APP*************")
   print("Active Bot: {}".format(client.user))
   print("Guild ID:",str(client.guilds).split()[1].replace("id=",""))
@@ -89,7 +90,6 @@ async def on_message(message):
     print("AUTHOR:",message.author)
     print("CONTENT:",message.content,"length",len(message.content))
     #print("Mentions:",message.mentions,message.channel_mentions,message.raw_channel_mentions)
-    await message.author.send ("Test")
     #await message.channel.send("BOTtest")
     #await message.channel.purge(limit=100)
     print(message.channel.id)
@@ -131,4 +131,3 @@ keep_alive()
 token = os.environ.get("bot_secret")
 client.run(token)
 
-search(Database,Table)

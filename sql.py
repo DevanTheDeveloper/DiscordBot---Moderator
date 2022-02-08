@@ -1,4 +1,6 @@
 import sqlite3
+import datetime
+
 
 Database="AUTHDB"
 Table="AUTHLOG"
